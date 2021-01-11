@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+
+public class Hold {
+    private int maxWeight;
+    private ArrayList<Suitcase> luggage; 
+    
+    public Hold(int maxWeight) {
+        luggage = new ArrayList<>();
+        this.maxWeight = maxWeight;
+    }
+    public int totalWeight() {
+        int total = 0;
+        for (Suitcase suitcase : luggage) {
+            total += suitcase.totalWeight();
+        }
+        return total;
+               
+    }
+    
+    public void addSuitcase(Suitcase suitcase) {
+        if (totalWeight() + suitcase.totalWeight() > maxWeight)
+            return;
+        luggage.add(suitcase);
+    }
+    
+    public void printItems() {
+        for (Suitcase suitcase : luggage)
+            suitcase.printItems();
+    }
+    
+    @Override
+    public  String toString() {
+        return luggage.size() + " suitcases (" + totalWeight() + "kg)";
+    }
+}
